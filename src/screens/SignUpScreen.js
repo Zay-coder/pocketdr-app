@@ -1,8 +1,5 @@
-import {StatusBar} from 'expo-status-bar';
 import React, {useState} from 'react';
-import {StyleSheet, Text, View, TouchableOpacity, TextInput} from 'react-native';
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
+import {StyleSheet, Text, View, TouchableOpacity, TextInput, Picker} from 'react-native';
 import {createNativeStackNavigator} from "react-native-screens/native-stack";
 
 
@@ -10,48 +7,58 @@ import {createNativeStackNavigator} from "react-native-screens/native-stack";
 
 function SignUpScreen({navigation}) {
     const onPress = () => {};
+    const [selectedValue, setSelectedValue] = useState("Gender");
     return (
         <View style={styles.container}>
-            <View>
-                <Text style={{paddingTop: 40, fontSize: 17, textAlign: 'center'}}>Sign Up Screen</Text>
-            </View>
             <View  style={{paddingTop: 20, textAlign:'left', paddingLeft:20}}>
-                <Text style={{ fontSize: 20, }}>
+                <Text style={{ fontSize: 15, }}>
                    First name :
                 </Text>
-                <TextInput style={styles.textInput}/>
+                <TextInput placeholder='First name' style={styles.textInput}/>
             </View>
             <View  style={{paddingTop: 20, textAlign:'left', paddingLeft:20}}>
-                <Text style={{ fontSize: 20, }}>
+                <Text style={{ fontSize: 15, }}>
                     Last name :
                 </Text>
-                <TextInput style={styles.textInput}/>
+                <TextInput placeholder='Last name' style={styles.textInput}/>
             </View>
             <View  style={{paddingTop: 20, textAlign:'left', paddingLeft:20}}>
-                <Text style={{ fontSize: 20, }}>
+                <Text style={{ fontSize: 15, }}>
                     Email :
                 </Text>
-                <TextInput style={styles.textInput}/>
+                <TextInput placeholder='E-mail' style={styles.textInput}/>
             </View>
             <View  style={{paddingTop: 20, textAlign:'left', paddingLeft:20}}>
-                <Text style={{ fontSize: 20, }}>
+                <Text style={{ fontSize: 15, }}>
                     Password :
                 </Text>
-                <TextInput style={styles.textInput}/>
+                <TextInput placeholder='Password' style={styles.textInput} secureTextEntry={true}/>
             </View>
             <View  style={{paddingTop: 20, textAlign:'left', paddingLeft:20, }}>
-                <Text style={{ fontSize: 20, }}>
+                <Text style={{ fontSize: 15, }}>
                     Date of birth:
                 </Text>
-                <TextInput style={styles.textInput}/>
+                <TextInput placeholder='Date of birth' style={styles.textInput}/>
             </View>
-            <View  style={{paddingTop: 20, textAlign:'left', paddingLeft:20, }}>
-                <Text style={{ fontSize: 20, }}>
-                    Gender:</Text>
+            <View  style={{paddingTop: 20, textAlign:'left', paddingLeft:20 }}>
+                <Text>
+                    Gender:
+                </Text>
+            </View>
+            <View style={{textAlign:'left', paddingLeft:15}}>
+                <Picker
+                    selectedValue={selectedValue}
+                    style={{ height: 50, width: 150}}
+                    onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
+                >
+                    <Picker.Item label="Male" value="male" />
+                    <Picker.Item label="Female" value="female" />
+                </Picker>
+
 
             </View>
             <View>
-                <TouchableOpacity onPress={() => navigation.navigate('Login')} style={styles.button}>
+                <TouchableOpacity onPress={() => navigation.navigate('login')} style={styles.button}>
                     <Text style={styles.buttonText}>Sign Up</Text>
                 </TouchableOpacity>
 
@@ -65,21 +72,21 @@ function SignUpScreen({navigation}) {
     )
 }
 
-const Stack = createNativeStackNavigator(); // Stack contains Screen & Navigator properties
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#E2F4FF',
 
 
+
     },
     button: {
         backgroundColor: '#ADE0FF',
-        borderRadius: 8,
+        borderRadius: 25,
         padding: 6,
         borderColor:'#000000',
         borderWidth: 1,
-        width: 300,
+        width: 320,
         marginLeft: 20,
         marginTop: 15
     },
@@ -92,11 +99,12 @@ const styles = StyleSheet.create({
     },
 
     textInput: {
-        marginTop:5,
+        backgroundColor:'#ffffff',
         borderWidth: 1,
         borderRadius: 5,
         borderColor:'#D3D3D3',
-        width: 300
+        width: 320,
+        padding: 5
     }
 });
 export default  SignUpScreen;

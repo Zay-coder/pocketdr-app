@@ -10,8 +10,6 @@ import {
     TouchableWithoutFeedback,
     TextInput, ScrollView
 } from 'react-native';
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
 import {createNativeStackNavigator} from "react-native-screens/native-stack";
 import {Avatar, Card, Icon, ListItem} from "react-native-elements";
 
@@ -90,7 +88,7 @@ function TherapistsScreen({navigation}) {
                             <ListItem key={i} bottomDivider>
                                 <Avatar source={{uri: l.avatar_url}} style={styles.avatar} />
                                 <ListItem.Content style={styles.listItem}>
-                                    <TouchableOpacity onPress={() => navigation.navigate('TherapistProfile')}>
+                                    <TouchableOpacity onPress={() => navigation.navigate('therapistprofile')}>
                                     <ListItem.Title style={{fontWeight: 'bold'}}>{l.name}</ListItem.Title>
                                     <ListItem.Subtitle>{l.subtitle}</ListItem.Subtitle>
                                     <ListItem.Subtitle>{l.yof}</ListItem.Subtitle>
@@ -111,7 +109,6 @@ function TherapistsScreen({navigation}) {
     )
 }
 
-const Stack = createNativeStackNavigator(); // Stack contains Screen & Navigator properties
 const styles = StyleSheet.create({
     container: {
         flex: 1,

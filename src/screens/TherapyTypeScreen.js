@@ -1,9 +1,6 @@
 import {StatusBar} from 'expo-status-bar';
 import React, {useState} from 'react';
 import {StyleSheet, Text, View, Button, Image, TouchableOpacity, TouchableWithoutFeedback} from 'react-native';
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
-import ChallengesScreen from "./ChallengesScreen";
 import {createNativeStackNavigator} from "react-native-screens/native-stack";
 
 
@@ -44,7 +41,6 @@ function TherapyTypeScreen({navigation}) {
     )
 }
 
-const Stack = createNativeStackNavigator(); // Stack contains Screen & Navigator properties
 const styles = StyleSheet.create({
     container: {
         flex: 1,

@@ -1,10 +1,6 @@
 import {StatusBar} from 'expo-status-bar';
 import React, {useState} from 'react';
 import {StyleSheet, Text, View, Button, Image, TouchableOpacity} from 'react-native';
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
-import {Screen} from "react-native-screens";
-import {createNativeStackNavigator} from "react-native-screens/native-stack";
 
 
 
@@ -28,12 +24,12 @@ function HomeScreen({navigation}) {
                        />
             </View>
             <View>
-                <TouchableOpacity onPress={() => navigation.navigate('TherapyType')} style={styles.button}>
+                <TouchableOpacity onPress={() => navigation.navigate('signup')} style={styles.button}>
                     <Text style={styles.buttonText}>Get Started</Text>
                 </TouchableOpacity>
             </View>
             <View style={{paddingTop: 10}}>
-                <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+                <TouchableOpacity onPress={() => navigation.navigate('login')}>
                     <Text>already a member? <Text style={{color: '#50BDFF'}}>Login Now.</Text>
                 </Text>
                 </TouchableOpacity>
@@ -45,7 +41,6 @@ function HomeScreen({navigation}) {
     )
 }
 
-const Stack = createNativeStackNavigator(); // Stack contains Screen & Navigator properties
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -55,7 +50,7 @@ const styles = StyleSheet.create({
     },
     button: {
         backgroundColor: '#ADE0FF',
-        borderRadius: 20,
+        borderRadius: 25,
         padding: 10,
         borderColor:'#000000',
         borderWidth: 1,

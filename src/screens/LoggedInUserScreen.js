@@ -1,13 +1,8 @@
 import {StatusBar} from 'expo-status-bar';
 import React, {useState} from 'react';
 import {StyleSheet, Text, View, Button, Image, TouchableOpacity, TouchableWithoutFeedback} from 'react-native';
-import {createNativeStackNavigator} from "react-native-screens/native-stack";
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import HomeScreen from "./HomeScreen";
 
 
-
-const Tab = createBottomTabNavigator();
 
 function LoggedInUserScreen({navigation}) {
     const onPress = () => {};
@@ -17,35 +12,31 @@ function LoggedInUserScreen({navigation}) {
             <StatusBar style="auto"/>
             <Text style={{ fontSize: 30, paddingLeft:15}}>Choose Therapy Type</Text>
             <View style={{flexDirection:'row', margin:10, marginTop:50, paddingLeft:15}}>
-                <TouchableWithoutFeedback onPress={() => navigation.navigate('Challenges')}>
+                <TouchableWithoutFeedback onPress={() => navigation.navigate('challenges')}>
                         <Image source={require('../../assets/images/logos.png')}/>
                 </TouchableWithoutFeedback>
                 <Text style={{margin:30, fontSize:20, paddingLeft:15}}>Adult</Text>
             </View>
             <View style={{flexDirection:'row', margin:10, paddingLeft:15}}>
-                <TouchableWithoutFeedback onPress={() => navigation.navigate('Challenges')}>
+                <TouchableWithoutFeedback onPress={() => navigation.navigate('challenges')}>
                     <Image source={require('../../assets/images/logos.png')}/>
                 </TouchableWithoutFeedback>
                 <Text style={{margin:30, fontSize:20, paddingLeft:15}}>Child / Adolescent</Text>
             </View>
             <View style={{flexDirection:'row', margin:10, paddingLeft:15}}>
-                <TouchableWithoutFeedback onPress={() => navigation.navigate('Challenges')}>
+                <TouchableWithoutFeedback onPress={() => navigation.navigate('challenges')}>
                     <Image source={require('../../assets/images/logos.png')}/>
                 </TouchableWithoutFeedback>
                 <Text style={{margin:30, fontSize:20, paddingLeft:15}}> Couple / Family </Text>
             </View>
-            <Tab.Navigator screenOptions={{ headerShown: false }}>
-                <Tab.Screen name="Home" component={HomeScreen} />
-                <Tab.Screen name="Appointments" component={HomeScreen} />
-                <Tab.Screen name="Profile" component={HomeScreen} />
-            </Tab.Navigator>
+
 
 
         </View>
     )
 }
 
-const Stack = createNativeStackNavigator(); // Stack contains Screen & Navigator properties
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,

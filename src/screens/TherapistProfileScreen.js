@@ -62,14 +62,11 @@ function TherapistsScreen({navigation}) {
                 <View>
                     <Text style={{fontSize:20 , margin:5, padding: 3}}>
                         Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum
-                        Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum
-                        Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum
-                        Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum
 
                     </Text>
                 </View>
                 <View>
-                    <TouchableOpacity onPress={() => navigation.navigate('TherapistProfile')} style={styles.button}>
+                    <TouchableOpacity onPress={() => navigation.navigate('therapistprofile')} style={styles.button}>
                         <Text style={styles.buttonText}>Book Appointment</Text>
                     </TouchableOpacity>
                 </View>
@@ -84,7 +81,6 @@ function TherapistsScreen({navigation}) {
     )
 }
 
-const Stack = createNativeStackNavigator(); // Stack contains Screen & Navigator properties
 const styles = StyleSheet.create({
     container: {
         flex: 1,
