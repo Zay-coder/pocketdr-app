@@ -10,9 +10,9 @@ function HomeScreen({navigation}) {
     return (
         <View style={styles.container}>
             <View style={{paddingTop: 50}}>
-                <Image source={require('../../assets/images/logos.png')}/>
+                <Image source={require('../../assets/images/pocketdr.png')} style={{width:120, height:120}}/>
             </View>
-            <Text style={{paddingTop: 40, fontSize: 40}}>Pocket Dr</Text>
+            <Text style={{paddingTop: 10, fontSize: 40}}>Pocket Dr</Text>
 
             <StatusBar style="auto"/>
             <View style={{paddingTop: 10}}>

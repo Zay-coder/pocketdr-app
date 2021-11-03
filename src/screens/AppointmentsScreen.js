@@ -3,21 +3,21 @@ import React, {useState} from 'react';
 import {StyleSheet, Text, View, Button, Image, TouchableOpacity, TouchableWithoutFeedback} from 'react-native';
 
 
-
-
-
-
-
-function AppointmentsScreen({navigation}) {
+function ProfileScreen({navigation}) {
     const onPress = () => {};
     return (
         <View style={styles.container}>
-            <Text style={{paddingTop: 40, fontSize: 30, fontWeight:'bold', paddingLeft:15}}>Appointments screen!</Text>
+            <Text style={{paddingTop: 30, fontSize: 20, fontWeight:'bold', textAlign: 'center'}}>Appointments</Text>
             <StatusBar style="auto"/>
+
+
+
+
 
         </View>
     )
 }
+
 
 const styles = StyleSheet.create({
     container: {
@@ -43,4 +43,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default  AppointmentsScreen;
+export default  ProfileScreen;

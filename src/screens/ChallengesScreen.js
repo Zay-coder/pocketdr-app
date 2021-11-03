@@ -9,8 +9,6 @@ function ChallengesScreen({navigation}) {
     const onPress = () => {};
     return (
         <View style={styles.container}>
-           <Text style={{paddingTop: 40, fontSize: 30}}>Identify your challenge</Text>
-            <StatusBar style="auto"/>
             <View style={{paddingTop: 40, flexDirection:'row', justifyContent:'space-between', alignItems: 'center', flexWrap: 'wrap'}}>
             <TouchableWithoutFeedback onPress={() => navigation.navigate('therapists')}>
                 <View style={{padding: 15}}>
@@ -57,7 +55,7 @@ function ChallengesScreen({navigation}) {
                 <TouchableWithoutFeedback onPress={() => navigation.navigate('therapists')}>
                     <View style={{padding: 15}}>
                         <Image source={require('../../assets/images/challengelogo.png')}/>
-                        <Text style={{textAlign: 'center'}}>Sleep Deprivation</Text>
+                        <Text style={{textAlign: 'center'}}>Sleep</Text>
                     </View>
                 </TouchableWithoutFeedback>
                 <TouchableWithoutFeedback onPress={() => navigation.navigate('therapists')}>

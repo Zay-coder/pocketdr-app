@@ -30,7 +30,20 @@ const ProfileStackScreen = () => (
         <ProfileStack.Screen
             name="profile"
             component={ProfileScreen}
-            options={{headerShown: false}}
+            options={{
+                title: 'Profile',
+                headerTitleAlign: 'center',
+                headerStyle: {
+                    backgroundColor: '#ffffff',
+
+
+                },
+                headerTintColor: '#000000',
+                headerTitleStyle: {
+                    fontWeight: 'bold',
+
+                },
+            }}
         />
     </ProfileStack.Navigator>
 );
@@ -39,12 +52,38 @@ const AppointmentsStackScreen = () => (
         <AppointmentsStack.Screen
             name="appointments"
             component={AppointmentsScreen}
-            options={{headerShown: false}}
+            options={{
+                title: 'Appointments',
+                headerTitleAlign: 'center',
+                headerStyle: {
+                    backgroundColor: '#ffffff',
+
+
+                },
+                headerTintColor: '#000000',
+                headerTitleStyle: {
+                    fontWeight: 'bold',
+
+                },
+            }}
         />
         <AppointmentsStack.Screen
             name="appointmentInfo"
             component={AppointmentInfoScreen}
-            options={{title: "Go Back to Appointments"}}
+            options={{
+                title: 'Appointment',
+                headerTitleAlign: 'center',
+                headerStyle: {
+                    backgroundColor: '#ffffff',
+
+
+                },
+                headerTintColor: '#000000',
+                headerTitleStyle: {
+                    fontWeight: 'bold',
+
+                },
+            }}
         />
     </AppointmentsStack.Navigator>
 
@@ -59,17 +98,56 @@ const HomeStackScreen = () => (
         <HomeStack.Screen
             name="challenges"
             component={ChallengesScreen}
-            options={{title: "Go Back to therapy type"}}
+            options={{
+                title: 'Challenges',
+                headerTitleAlign: 'center',
+                headerStyle: {
+                    backgroundColor: '#ffffff',
+
+
+                },
+                headerTintColor: '#000000',
+                headerTitleStyle: {
+                    fontWeight: 'bold',
+
+                },
+            }}
         />
         <HomeStack.Screen
             name="therapists"
             component={TherapistsScreen}
-            options={{title: "Go Back to challenges"}}
+            options={{
+                title: 'Therapists',
+                headerTitleAlign: 'center',
+                headerStyle: {
+                    backgroundColor: '#ffffff',
+
+
+                },
+                headerTintColor: '#000000',
+                headerTitleStyle: {
+                    fontWeight: 'bold',
+
+                },
+            }}
         />
         <HomeStack.Screen
             name="therapistprofile"
             component={TherapistProfileScreen}
-            options={{title: "Go Back to therapists"}}
+            options={{
+                title: 'Therapist Profile',
+                headerTitleAlign: 'center',
+                headerStyle: {
+                    backgroundColor: '#ffffff',
+
+
+                },
+                headerTintColor: '#000000',
+                headerTitleStyle: {
+                    fontWeight: 'bold',
+
+                },
+            }}
         />
 
     </HomeStack.Navigator>
@@ -82,109 +160,110 @@ export default function App() {
 
         <NavigationContainer>
 
-            {/*<AuthStack.Navigator initialRouteName="homepage">*/}
-            {/*    <AuthStack.Screen*/}
-            {/*        name="homepage"*/}
-            {/*        component={HomeScreen}*/}
-            {/*        options={{headerShown: false}}*/}
-            {/*    />*/}
-            {/*    <AuthStack.Screen*/}
-            {/*        name="login"*/}
-            {/*        component={LoginScreen}*/}
+            <AuthStack.Navigator initialRouteName="homepage">
+                <AuthStack.Screen
+                    name="homepage"
+                    component={HomeScreen}
+                    options={{headerShown: false}}
+                />
+                <AuthStack.Screen
+                    name="login"
+                    component={LoginScreen}
+                    options={{
+                        title: 'Login In',
+                        headerTitleAlign: 'center',
+                        headerStyle: {
+                            backgroundColor: '#ffffff',
+
+
+                        },
+                        headerTintColor: '#000000',
+                        headerTitleStyle: {
+                            fontWeight: 'bold',
+
+                        },
+                    }}
+                />
+                <AuthStack.Screen
+                    name="signup"
+                    component={SignUpScreen}
+                    options={{
+                        title: 'Sign Up',
+                        headerTitleAlign: 'center',
+                        headerStyle: {
+                            backgroundColor: '#ffffff',
+
+
+                        },
+                        headerTintColor: '#000000',
+                        headerTitleStyle: {
+                            fontWeight: 'bold',
+
+                        },
+                    }}
+                />
+            </AuthStack.Navigator>
+
+            {/*<Tab.Navigator*/}
+            {/*    activeColor="white"*/}
+            {/*    inactiveColor="grey"*/}
+            {/*    barStyle={{*/}
+            {/*        backgroundColor: '#ADE0FF',*/}
+            {/*        shadowColor: "black",*/}
+            {/*        shadowOffset: {width: 1, height: 3},*/}
+            {/*        shadowOpacity: 0.7,*/}
+            {/*        shadowRadius: 5,*/}
+            {/*        overflow: "hidden",*/}
+            {/*        height: 56,*/}
+            {/*        // borderTopLeftRadius: 15,*/}
+            {/*        // borderTopRightRadius: 15,*/}
+            {/*    }}*/}
+            {/*    initialRouteName="Home"*/}
+            {/*>*/}
+            {/*    <Tab.Screen*/}
+            {/*        name="Home"*/}
+            {/*        component={HomeStackScreen}*/}
             {/*        options={{*/}
-            {/*            title: 'Login In',*/}
-            {/*            headerTitleAlign: 'center',*/}
-            {/*            headerStyle: {*/}
-            {/*                backgroundColor: '#ffffff',*/}
-
-
-            {/*            },*/}
-            {/*            headerTintColor: '#000000',*/}
-            {/*            headerTitleStyle: {*/}
-            {/*                fontWeight: 'bold',*/}
-
-            {/*            },*/}
+            {/*            headerShown: false,*/}
+            {/*            tabBarIcon: ({focused, color, size}) => (*/}
+            {/*                <MaterialCommunityIcons*/}
+            {/*                    name={"folder-home-outline"}*/}
+            {/*                    size={25}*/}
+            {/*                    color={color}*/}
+            {/*                />*/}
+            {/*            ),*/}
             {/*        }}*/}
             {/*    />*/}
-            {/*    <AuthStack.Screen*/}
-            {/*        name="signup"*/}
-            {/*        component={SignUpScreen}*/}
+
+            {/*    <Tab.Screen*/}
+            {/*        name="Appointments"*/}
+            {/*        component={AppointmentsStackScreen}*/}
             {/*        options={{*/}
-            {/*            title: 'Sign Up',*/}
-            {/*            headerTitleAlign: 'center',*/}
-            {/*            headerStyle: {*/}
-            {/*                backgroundColor: '#ffffff',*/}
-
-
-            {/*            },*/}
-            {/*            headerTintColor: '#000000',*/}
-            {/*            headerTitleStyle: {*/}
-            {/*                fontWeight: 'bold',*/}
-
-            {/*            },*/}
+            {/*            headerShown: false,*/}
+            {/*            tabBarIcon: ({focused, color, size}) => (*/}
+            {/*                <MaterialCommunityIcons*/}
+            {/*                    name={"book-search"}*/}
+            {/*                    size={25}*/}
+            {/*                    color={color}*/}
+            {/*                />*/}
+            {/*            ),*/}
             {/*        }}*/}
             {/*    />*/}
-            {/*</AuthStack.Navigator>*/}
-
-            <Tab.Navigator
-                activeColor="white"
-                inactiveColor="grey"
-                barStyle={{
-                    backgroundColor: '#ADE0FF',
-                    shadowColor: "black",
-                    shadowOffset: {width: 1, height: 3},
-                    shadowOpacity: 0.7,
-                    shadowRadius: 5,
-                    overflow: "hidden",
-                    height: 56,
-                    // borderTopLeftRadius: 15,
-                    // borderTopRightRadius: 15,
-                }}
-                initialRouteName="Home"
-            >
-                <Tab.Screen
-                    name="Home"
-                    component={HomeStackScreen}
-                    options={{
-                        headerShown: false,
-                        tabBarIcon: ({focused, color, size}) => (
-                            <MaterialCommunityIcons
-                                name={"plus-box"}
-                                size={25}
-                                color={color}
-                            />
-                        ),
-                    }}
-                />
-                <Tab.Screen
-                    name="Profile"
-                    component={ProfileStackScreen}
-                    options={{
-                        headerShown: false,
-                        tabBarIcon: ({focused, color, size}) => (
-                            <MaterialCommunityIcons
-                                name={"account"}
-                                size={25}
-                                color={color}
-                            />
-                        ),
-                    }}
-                />
-                <Tab.Screen
-                    name="Appointments"
-                    component={AppointmentsStackScreen}
-                    options={{
-                        headerShown: false,
-                        tabBarIcon: ({focused, color, size}) => (
-                            <MaterialCommunityIcons
-                                name={"book-search"}
-                                size={25}
-                                color={color}
-                            />
-                        ),
-                    }}
-                />
-            </Tab.Navigator>
+            {/*    <Tab.Screen*/}
+            {/*        name="Profile"*/}
+            {/*        component={ProfileStackScreen}*/}
+            {/*        options={{*/}
+            {/*            headerShown: false,*/}
+            {/*            tabBarIcon: ({focused, color, size}) => (*/}
+            {/*                <MaterialCommunityIcons*/}
+            {/*                    name={"account"}*/}
+            {/*                    size={25}*/}
+            {/*                    color={color}*/}
+            {/*                />*/}
+            {/*            ),*/}
+            {/*        }}*/}
+            {/*    />*/}
+            {/*</Tab.Navigator>*/}
         </NavigationContainer>
 
     );

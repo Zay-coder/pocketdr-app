@@ -1,14 +1,47 @@
 import {StatusBar} from 'expo-status-bar';
 import React, {useState} from 'react';
 import {StyleSheet, Text, View, Button, Image, TouchableOpacity, TouchableWithoutFeedback} from 'react-native';
+import {Avatar, ListItem} from "react-native-elements";
 
 
 function ProfileScreen({navigation}) {
     const onPress = () => {};
+    const list = [
+        {
+            name: 'Patrick El Zaybak',
+            gender: 'Male',
+            dob:'1996-11-03',
+            joined:'joined in 2017-05-11'
+        },
+
+    ]
     return (
         <View style={styles.container}>
-            <Text style={{paddingTop: 40, fontSize: 30, fontWeight:'bold', paddingLeft:15}}>profile screen!</Text>
-            <StatusBar style="auto"/>
+            <View style={{marginTop:30}}>
+                        {
+                            list.map((l, i) => (
+                                <ListItem key={i} bottomDivider>
+                                    <ListItem.Content style={styles.listItem}>
+                                        <ListItem.Title style={{fontWeight: 'bold', fontSize:20}}>{l.name}</ListItem.Title>
+                                        <ListItem.Subtitle>{l.gender}</ListItem.Subtitle>
+                                        <ListItem.Subtitle>{l.dob}</ListItem.Subtitle>
+                                        <ListItem.Subtitle>{l.joined}</ListItem.Subtitle>
+                                    </ListItem.Content>
+                                </ListItem>
+                            ))
+                        }
+
+            </View>
+            <View style={{alignItems:'center'}}>
+                <TouchableOpacity onPress={() => navigation.navigate('edit')} style={styles.button}>
+                    <Text style={styles.buttonText}>Edit Profile</Text>
+                </TouchableOpacity>
+            </View>
+            <View style={{alignItems:'center', marginTop:250}}>
+                <TouchableOpacity onPress={() => navigation.navigate('logout')} style={styles.button}>
+                    <Text style={styles.logout}>Logout</Text>
+                </TouchableOpacity>
+            </View>
 
         </View>
     )
@@ -25,16 +58,26 @@ const styles = StyleSheet.create({
     },
     button: {
         backgroundColor: '#ADE0FF',
-        borderRadius: 20,
-        padding: 10,
+        borderRadius: 25,
+        padding: 6,
         borderColor:'#000000',
         borderWidth: 1,
-        width: 200,
+        width: 320,
+        marginTop:10
     },
     buttonText: {
         color: '#000000',
         fontWeight: 'bold',
         textAlign:'center',
+        fontSize:20
+
+    },
+    logout: {
+        color: '#FF0000',
+        fontWeight: 'bold',
+        textAlign:'center',
+        fontSize:20
+
 
     }
 });

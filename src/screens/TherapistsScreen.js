@@ -1,161 +1,184 @@
-import {StatusBar} from 'expo-status-bar';
-import React, {useState} from 'react';
+import React from 'react'
 import {
-    StyleSheet,
-    Text,
+    FlatList,
     View,
-    Button,
-    Image,
-    TouchableOpacity,
-    TouchableWithoutFeedback,
-    TextInput, ScrollView
-} from 'react-native';
-import {createNativeStackNavigator} from "react-native-screens/native-stack";
-import {Avatar, Card, Icon, ListItem} from "react-native-elements";
+    ActivityIndicator,
+    TouchableOpacity
+} from 'react-native'
+import filter from 'lodash.filter'
+import {ApplicationProvider, Text, Avatar, Input} from '@ui-kitten/components'
+import {mapping, light as lightTheme} from '@eva-design/eva'
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
+class ShowTherapists extends React.Component {
+    state = {
+        loading: false,
+        data: [],
+        page: 1,
+        seed: 1,
+        error: null,
+        query: '',
+        fullData: []
+    }
 
+    componentDidMount() {
+        this.makeRemoteRequest()
+    }
 
+    makeRemoteRequest = () => {
+        const {page, seed} = this.state
+        const url = `https://randomuser.me/api/?seed=${seed}&page=${page}&results=20`
+        this.setState({loading: true})
 
+        fetch(url)
+            .then(res => res.json())
+            .then(res => {
+                this.setState({
+                    data: page === 1 ? res.results : [...this.state.data, ...res.results],
+                    error: res.error || null,
+                    loading: false,
+                    fullData: res.results
+                })
+            })
+            .catch(error => {
+                this.setState({error, loading: false})
+            })
+    }
 
-function TherapistsScreen({navigation}) {
-    const onPress = () => {};
-    const list = [
-        {
-            name: 'Amy Farha',
-            avatar_url: '../../assets/images/ProfileImage.png',
-            subtitle: 'CBT Specialist',
-            yof:'7 years of experience'
-        },
-        {
-            name: 'Chris Jackson',
-            avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
-            subtitle: 'Children behavior Specialist',
-            yof:'4 years of experience'
-        },
-        {
-            name: 'Bella James',
-            avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
-            subtitle: 'Intimacy and sex Specialist',
-            yof:'10 years of experience'
-        },
-        {
-            name: 'Bella James',
-            avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
-            subtitle: 'Intimacy and sex Specialist',
-            yof:'10 years  of experience'
-        },
-        {
-            name: 'Bella James',
-            avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
-            subtitle: 'Intimacy and sex Specialist',
-            yof:'10 years of experience'
-        },
-        {
-            name: 'Bella James',
-            avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
-            subtitle: 'Intimacy and sex Specialist',
-            yof:'10 years of experience'
-        },
-        {
-            name: 'Bella James',
-            avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
-            subtitle: 'Intimacy and sex Specialist',
-            yof:'10 years of experience'
-        },
-        {
-            name: 'Bella James',
-            avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
-            subtitle: 'Intimacy and sex Specialist',
-            yof:'10 years'
-        },
-    ]
-    return (
-        <View style={styles.container}>
-            <View style={{paddingTop:40}}>
-                <TextInput
-                    style={styles.search}
-                    placeholder="Search Therapists"
+    contains = ({name, email}, query) => {
+        const {first, last} = name
+        if (
+            first.includes(query) ||
+            last.includes(query) ||
+            email.includes(query)
+        ) {
+            return true
+        }
+        return false
+    }
 
-                />
-                <Text style={{paddingTop: 15, fontSize: 15, paddingLeft: 10}}>Available Therapists</Text>
-                <StatusBar style="auto"/>
-            </View>
-            <View>
+    handleSearch = text => {
+        const formattedQuery = text.toLowerCase()
+        const data = filter(this.state.fullData, user => {
+            return this.contains(user, formattedQuery)
+        })
+        this.setState({data, query: text})
+    }
 
-                <ScrollView style={{paddingTop: 15}}>
-                    {
-                        list.map((l, i) => (
-                            <ListItem key={i} bottomDivider>
-                                <Avatar source={{uri: l.avatar_url}} style={styles.avatar} />
-                                <ListItem.Content style={styles.listItem}>
-                                    <TouchableOpacity onPress={() => navigation.navigate('therapistprofile')}>
-                                    <ListItem.Title style={{fontWeight: 'bold'}}>{l.name}</ListItem.Title>
-                                    <ListItem.Subtitle>{l.subtitle}</ListItem.Subtitle>
-                                    <ListItem.Subtitle>{l.yof}</ListItem.Subtitle>
-                                    </TouchableOpacity>
-                                </ListItem.Content>
-                            </ListItem>
-                        ))
-                    }
-                </ScrollView>
+    renderHeader = () => (
+        <View
+            style={{
+                flex:1,
+                flexDirection:'row',
+                alignItems: 'center',
+                justifyContent: 'center'
+            }}>
+            <MaterialCommunityIcons
+                name={"account-search"}
+                size={35}
+                color={'#fff'}
+                style={{padding:10}}
 
+            />
 
-
-            </View>
-
+            <Input
+                autoCapitalize='none'
+                autoCorrect={false}
+                onChangeText={this.handleSearch}
+                status='info'
+                placeholder='search therapists'
+                style={{
+                    flex:1,
+                    paddingTop: 15,
+                    paddingRight: 10,
+                    paddingBottom: 10,
+                    paddingLeft: 0,
+                    borderRadius: 25,
+                    borderColor: '#333',
+                    backgroundColor: '#fff'
+                }}
+                placeholderTextColor='#000'
+                textStyle={{color: '#000', textAlign:'center'}}
+                clearButtonMode='always'
+            />
 
 
         </View>
     )
+
+    renderSeparator = () => {
+        return (
+            <View
+                style={{
+                    height: 1,
+                    width: '90%',
+                    backgroundColor: '#fff',
+                    marginLeft: '5%'
+                }}
+            />
+        )
+    }
+
+    renderFooter = () => {
+        if (!this.state.loading) return null
+        return (
+            <View
+                style={{
+                    paddingVertical: 20,
+                    borderTopWidth: 1,
+                    borderColor: '#CED0CE'
+                }}>
+                <ActivityIndicator animating size='large'/>
+            </View>
+        )
+    }
+
+    render() {
+        return (
+            <View
+                style={{
+                    flex: 1,
+                    backgroundColor:'#E2F4FF'
+                }}>
+                <FlatList
+                    data={this.state.data}
+                    renderItem={({item}) => (
+                        <TouchableOpacity onPress={() => alert('Item pressed!')}>
+                            <View
+                                style={{
+                                    flexDirection: 'row',
+                                    padding: 10,
+                                    alignItems: 'center'
+                                }}>
+                                <Avatar
+                                    source={{uri: item.picture.thumbnail}}
+                                    size='giant'
+                                    style={{marginRight: 16}}
+                                />
+                                <Text
+                                    category='s1'
+                                    style={{
+                                        color: '#000'
+                                    }}>{`${item.name.first} ${item.name.last}`}</Text>
+                            </View>
+                        </TouchableOpacity>
+                    )}
+                    keyExtractor={item => item.email}
+                    ItemSeparatorComponent={this.renderSeparator}
+                    ListHeaderComponent={this.renderHeader}
+                    ListFooterComponent={this.renderFooter}
+                />
+            </View>
+        )
+    }
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#E2F4FF',
+const TherapistsScreen = () => (
 
+    <ApplicationProvider mapping={mapping} theme={lightTheme}>
+        <ShowTherapists/>
+    </ApplicationProvider>
 
+)
 
-
-    },
-    button: {
-        backgroundColor: '#ADE0FF',
-        borderRadius: 20,
-        padding: 10,
-        borderColor:'#000000',
-        borderWidth: 1,
-        width: 200,
-    },
-    buttonText: {
-        color: '#000000',
-        fontWeight: 'bold',
-        textAlign:'center',
-
-    },
-    search: {
-
-        borderWidth: 1,
-        borderColor:'#000000',
-        borderRadius: 20,
-        textAlign: 'center',
-        padding: 5,
-        width: 260,
-        marginLeft: 50
-
-    },
-    avatar: {
-        width: 75,
-        height: 75,
-        borderRadius: 35,
-        overflow:'hidden'
-    },
-
-    listItem: {
-        padding:10,
-        borderWidth:1,
-        borderRadius:10
-
-    }
-});
-
-export default  TherapistsScreen;
+export default TherapistsScreen;
