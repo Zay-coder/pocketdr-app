@@ -1,8 +1,7 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {NavigationContainer} from "@react-navigation/native";
 import {createStackNavigator} from "@react-navigation/stack";
 import HomeScreen from "./src/screens/HomeScreen";
-import TherapyTypeScreen from "./src/screens/TherapyTypeScreen";
 import ChallengesScreen from "./src/screens/ChallengesScreen";
 import TherapistsScreen from "./src/screens/TherapistsScreen";
 import TherapistProfileScreen from "./src/screens/TherapistProfileScreen";
@@ -11,10 +10,17 @@ import SignUpScreen from "./src/screens/SignUpScreen";
 import LoggedInUserScreen from "./src/screens/LoggedInUserScreen";
 import AppointmentsScreen from "./src/screens/AppointmentsScreen";
 import ProfileScreen from "./src/screens/ProfileScreen";
+import { LogBox } from 'react-native';
+LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
+LogBox.ignoreAllLogs();//Ignore all log notifications
+import {AuthContext} from "./src/components/context";
+
 
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import {createMaterialBottomTabNavigator} from "@react-navigation/material-bottom-tabs";
 import AppointmentInfoScreen from "./src/screens/AppointmentInfo";
+import {ActivityIndicator, View} from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 export const AuthStack = createStackNavigator();
@@ -22,7 +28,6 @@ const Tab = createMaterialBottomTabNavigator();
 const ProfileStack = createStackNavigator();
 const AppointmentsStack = createStackNavigator();
 const HomeStack = createStackNavigator();
-
 
 // Browse nav and every navigation related to it
 const ProfileStackScreen = () => (
@@ -153,118 +158,142 @@ const HomeStackScreen = () => (
     </HomeStack.Navigator>
 );
 
+const BottomTabScreen = () => (
+    <Tab.Navigator
+        activeColor="white"
+        inactiveColor="grey"
+        barStyle={{
+            backgroundColor: '#ADE0FF',
+            shadowColor: "black",
+            shadowOffset: {width: 1, height: 3},
+            shadowOpacity: 0.7,
+            shadowRadius: 5,
+            overflow: "hidden",
+            height: 56,
+            // borderTopLeftRadius: 15,
+            // borderTopRightRadius: 15,
+        }}
+        initialRouteName="Home"
+    >
+        <Tab.Screen
+            name="Home"
+            component={HomeStackScreen}
+            options={{
+                headerShown: false,
+                tabBarIcon: ({focused, color, size}) => (
+                    <MaterialCommunityIcons
+                        name={"folder-home-outline"}
+                        size={25}
+                        color={color}
+                    />
+                ),
+            }}
+        />
+
+        <Tab.Screen
+            name="Appointments"
+            component={AppointmentsStackScreen}
+            options={{
+                headerShown: false,
+                tabBarIcon: ({focused, color, size}) => (
+                    <MaterialCommunityIcons
+                        name={"book-search"}
+                        size={25}
+                        color={color}
+                    />
+                ),
+            }}
+        />
+        <Tab.Screen
+            name="Profile"
+            component={ProfileStackScreen}
+            options={{
+                headerShown: false,
+                tabBarIcon: ({focused, color, size}) => (
+                    <MaterialCommunityIcons
+                        name={"account"}
+                        size={25}
+                        color={color}
+                    />
+                ),
+            }}
+        />
+    </Tab.Navigator>
+);
+
 
 export default function App() {
 
     return (
 
         <NavigationContainer>
-
-            <AuthStack.Navigator initialRouteName="homepage">
-                <AuthStack.Screen
-                    name="homepage"
-                    component={HomeScreen}
-                    options={{headerShown: false}}
-                />
-                <AuthStack.Screen
-                    name="login"
-                    component={LoginScreen}
-                    options={{
-                        title: 'Login In',
-                        headerTitleAlign: 'center',
-                        headerStyle: {
-                            backgroundColor: '#ffffff',
-
-
-                        },
-                        headerTintColor: '#000000',
-                        headerTitleStyle: {
-                            fontWeight: 'bold',
-
-                        },
-                    }}
-                />
-                <AuthStack.Screen
-                    name="signup"
-                    component={SignUpScreen}
-                    options={{
-                        title: 'Sign Up',
-                        headerTitleAlign: 'center',
-                        headerStyle: {
-                            backgroundColor: '#ffffff',
+                    <AuthStack.Navigator initialRouteName="homepage">
+                        <AuthStack.Screen
+                            name="homepage"
+                            component={HomeScreen}
+                            options={{headerShown: false}}
+                        />
+                        <AuthStack.Screen
+                            name="login"
+                            component={LoginScreen}
+                            options={{
+                                title: 'Login In',
+                                headerTitleAlign: 'center',
+                                headerStyle: {
+                                    backgroundColor: '#ffffff',
 
 
-                        },
-                        headerTintColor: '#000000',
-                        headerTitleStyle: {
-                            fontWeight: 'bold',
+                                },
+                                headerTintColor: '#000000',
+                                headerTitleStyle: {
+                                    fontWeight: 'bold',
 
-                        },
-                    }}
-                />
-            </AuthStack.Navigator>
+                                },
+                            }}
+                        />
+                        <AuthStack.Screen
+                            name="signup"
+                            component={SignUpScreen}
+                            options={{
+                                title: 'Sign Up',
+                                headerTitleAlign: 'center',
+                                headerStyle: {
+                                    backgroundColor: '#ffffff',
 
-            {/*<Tab.Navigator*/}
-            {/*    activeColor="white"*/}
-            {/*    inactiveColor="grey"*/}
-            {/*    barStyle={{*/}
-            {/*        backgroundColor: '#ADE0FF',*/}
-            {/*        shadowColor: "black",*/}
-            {/*        shadowOffset: {width: 1, height: 3},*/}
-            {/*        shadowOpacity: 0.7,*/}
-            {/*        shadowRadius: 5,*/}
-            {/*        overflow: "hidden",*/}
-            {/*        height: 56,*/}
-            {/*        // borderTopLeftRadius: 15,*/}
-            {/*        // borderTopRightRadius: 15,*/}
-            {/*    }}*/}
-            {/*    initialRouteName="Home"*/}
-            {/*>*/}
-            {/*    <Tab.Screen*/}
-            {/*        name="Home"*/}
-            {/*        component={HomeStackScreen}*/}
-            {/*        options={{*/}
-            {/*            headerShown: false,*/}
-            {/*            tabBarIcon: ({focused, color, size}) => (*/}
-            {/*                <MaterialCommunityIcons*/}
-            {/*                    name={"folder-home-outline"}*/}
-            {/*                    size={25}*/}
-            {/*                    color={color}*/}
-            {/*                />*/}
-            {/*            ),*/}
-            {/*        }}*/}
-            {/*    />*/}
 
-            {/*    <Tab.Screen*/}
-            {/*        name="Appointments"*/}
-            {/*        component={AppointmentsStackScreen}*/}
-            {/*        options={{*/}
-            {/*            headerShown: false,*/}
-            {/*            tabBarIcon: ({focused, color, size}) => (*/}
-            {/*                <MaterialCommunityIcons*/}
-            {/*                    name={"book-search"}*/}
-            {/*                    size={25}*/}
-            {/*                    color={color}*/}
-            {/*                />*/}
-            {/*            ),*/}
-            {/*        }}*/}
-            {/*    />*/}
-            {/*    <Tab.Screen*/}
-            {/*        name="Profile"*/}
-            {/*        component={ProfileStackScreen}*/}
-            {/*        options={{*/}
-            {/*            headerShown: false,*/}
-            {/*            tabBarIcon: ({focused, color, size}) => (*/}
-            {/*                <MaterialCommunityIcons*/}
-            {/*                    name={"account"}*/}
-            {/*                    size={25}*/}
-            {/*                    color={color}*/}
-            {/*                />*/}
-            {/*            ),*/}
-            {/*        }}*/}
-            {/*    />*/}
-            {/*</Tab.Navigator>*/}
+                                },
+                                headerTintColor: '#000000',
+                                headerTitleStyle: {
+                                    fontWeight: 'bold',
+
+                                },
+                            }}
+                        />
+                        <AuthStack.Screen
+                            name="bottomtabs"
+                            component={BottomTabScreen}
+                            options={{
+                                title: 'Welcome',
+                                headerTitleAlign: 'center',
+                                headerStyle: {
+                                    backgroundColor: '#ffffff',
+
+
+                                },
+                                headerTintColor: '#000000',
+                                headerTitleStyle: {
+                                    fontWeight: 'bold',
+
+                                },
+                            }}
+                            />
+
+                    </AuthStack.Navigator>
+
+
+
         </NavigationContainer>
+
 
     );
 }

@@ -1,11 +1,12 @@
-import {StatusBar} from 'expo-status-bar';
+
 import React, {useState} from 'react';
 import {StyleSheet, Text, View, Button, Image, TouchableOpacity, TouchableWithoutFeedback} from 'react-native';
 import {Avatar, ListItem} from "react-native-elements";
 
 
-function ProfileScreen({navigation}) {
-    const onPress = () => {};
+
+export function ProfileScreen({navigation}) {
+
     const list = [
         {
             name: 'Patrick El Zaybak',
@@ -37,8 +38,8 @@ function ProfileScreen({navigation}) {
                     <Text style={styles.buttonText}>Edit Profile</Text>
                 </TouchableOpacity>
             </View>
-            <View style={{alignItems:'center', marginTop:250}}>
-                <TouchableOpacity onPress={() => navigation.navigate('logout')} style={styles.button}>
+            <View style={{alignItems:'center', marginTop:230}}>
+                <TouchableOpacity  onPress={() => navigation.navigate('homepage')} style={styles.button}>
                     <Text style={styles.logout}>Logout</Text>
                 </TouchableOpacity>
             </View>

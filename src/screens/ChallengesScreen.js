@@ -12,56 +12,50 @@ function ChallengesScreen({navigation}) {
             <View style={{paddingTop: 40, flexDirection:'row', justifyContent:'space-between', alignItems: 'center', flexWrap: 'wrap'}}>
             <TouchableWithoutFeedback onPress={() => navigation.navigate('therapists')}>
                 <View style={{padding: 15}}>
-                    <Image source={require('../../assets/images/challengelogo.png')}/>
+                    <Image source={require('../../assets/images/depression.png')}/>
                     <Text style={{textAlign: 'center'}}>Depression</Text>
                 </View>
             </TouchableWithoutFeedback>
             <TouchableWithoutFeedback onPress={() => navigation.navigate('therapists')}>
                 <View style={{padding: 15}}>
-                    <Image source={require('../../assets/images/challengelogo.png')}/>
+                    <Image source={require('../../assets/images/anxiety.png')}/>
                     <Text style={{textAlign: 'center'}}>Anxiety</Text>
                 </View>
             </TouchableWithoutFeedback>
             <TouchableWithoutFeedback onPress={() => navigation.navigate('therapists')}>
                 <View style={{padding: 15}}>
-                    <Image source={require('../../assets/images/challengelogo.png')}/>
+                    <Image source={require('../../assets/images/stress.png')}/>
                     <Text style={{textAlign: 'center'}}>Stress</Text>
                 </View>
             </TouchableWithoutFeedback>
                 <TouchableWithoutFeedback onPress={() => navigation.navigate('therapists')}>
                     <View style={{padding: 15}}>
-                        <Image source={require('../../assets/images/challengelogo.png')}/>
+                        <Image source={require('../../assets/images/personality.png')}/>
                         <Text style={{textAlign: 'center'}}>Personality</Text>
                     </View>
                 </TouchableWithoutFeedback>
                 <TouchableWithoutFeedback onPress={() => navigation.navigate('therapists')}>
                     <View style={{padding: 15}}>
-                        <Image source={require('../../assets/images/challengelogo.png')}/>
+                        <Image source={require('../../assets/images/geriatric.png')}/>
                         <Text style={{textAlign: 'center'}}>Geriatric</Text>
                     </View>
                 </TouchableWithoutFeedback>
                 <TouchableWithoutFeedback onPress={() => navigation.navigate('therapists')}>
                     <View style={{padding: 15}}>
-                        <Image source={require('../../assets/images/challengelogo.png')}/>
+                        <Image source={require('../../assets/images/sex.png')}/>
                         <Text style={{textAlign: 'center'}}>Sex</Text>
                     </View>
                 </TouchableWithoutFeedback>
                 <TouchableWithoutFeedback onPress={() => navigation.navigate('therapists')}>
                     <View style={{padding: 15}}>
-                        <Image source={require('../../assets/images/challengelogo.png')}/>
+                        <Image source={require('../../assets/images/addiction.png')}/>
                         <Text style={{textAlign: 'center'}}>Addiction</Text>
                     </View>
                 </TouchableWithoutFeedback>
                 <TouchableWithoutFeedback onPress={() => navigation.navigate('therapists')}>
                     <View style={{padding: 15}}>
-                        <Image source={require('../../assets/images/challengelogo.png')}/>
+                        <Image source={require('../../assets/images/sleep.png')}/>
                         <Text style={{textAlign: 'center'}}>Sleep</Text>
-                    </View>
-                </TouchableWithoutFeedback>
-                <TouchableWithoutFeedback onPress={() => navigation.navigate('therapists')}>
-                    <View style={{padding: 15}}>
-                        <Image source={require('../../assets/images/challengelogo.png')}/>
-                        <Text style={{textAlign: 'center'}}>Personality</Text>
                     </View>
                 </TouchableWithoutFeedback>
 

@@ -1,37 +1,76 @@
 import {StatusBar} from 'expo-status-bar';
 import React, {useState} from 'react';
 import {StyleSheet, Text, View, Button, Image, TouchableOpacity, TouchableWithoutFeedback} from 'react-native';
+import {
+    JosefinSans_100Thin,
+    JosefinSans_200ExtraLight,
+    JosefinSans_300Light,
+    JosefinSans_400Regular,
+    JosefinSans_500Medium,
+    JosefinSans_600SemiBold,
+    JosefinSans_700Bold,
+    JosefinSans_100Thin_Italic,
+    JosefinSans_200ExtraLight_Italic,
+    JosefinSans_300Light_Italic,
+    JosefinSans_400Regular_Italic,
+    JosefinSans_500Medium_Italic,
+    JosefinSans_600SemiBold_Italic,
+    JosefinSans_700Bold_Italic
+} from '@expo-google-fonts/josefin-sans'
+import {useFonts} from 'expo-font';
+import AppLoading from "expo-app-loading";
+
 
 
 
 function LoggedInUserScreen({navigation}) {
+    let[fontsLoaded, error] = useFonts({
+        JosefinSans_100Thin,
+        JosefinSans_200ExtraLight,
+        JosefinSans_300Light,
+        JosefinSans_400Regular,
+        JosefinSans_500Medium,
+        JosefinSans_600SemiBold,
+        JosefinSans_700Bold,
+        JosefinSans_100Thin_Italic,
+        JosefinSans_200ExtraLight_Italic,
+        JosefinSans_300Light_Italic,
+        JosefinSans_400Regular_Italic,
+        JosefinSans_500Medium_Italic,
+        JosefinSans_600SemiBold_Italic,
+        JosefinSans_700Bold_Italic
+
+    })
+    if(!fontsLoaded) {
+        return <AppLoading/>
+    }
     const onPress = () => {};
     return (
         <View style={styles.container}>
             <Text style={{paddingTop: 30, fontSize: 20, fontWeight:'bold', textAlign: 'center'}}>Hello User!</Text>
             <StatusBar style="auto"/>
-            <Text style={{ fontSize: 20, marginTop:20, textAlign: 'center'}}>Choose Therapy Type</Text>
+            <Text style={{ fontSize: 20, marginTop:20, textAlign: 'center',fontFamily:'JosefinSans_400Regular'}}>Choose Therapy Type</Text>
             <View style={{flexDirection:'row', margin:10}}>
                 <TouchableWithoutFeedback onPress={() => navigation.navigate('challenges')}>
-                        <Image source={require('../../assets/images/logos.png')}/>
+                        <Image source={require('../../assets/images/adult.png')} style={{width:110, height:110}}/>
                 </TouchableWithoutFeedback>
-                <Text style={{fontSize:20, marginTop:30}}> Adult</Text>
+                <Text style={{fontSize:20, marginTop:30,fontFamily:'JosefinSans_400Regular'}}> Adult</Text>
             </View>
             <View style={{flexDirection:'row', margin:10}}>
                 <TouchableWithoutFeedback onPress={() => navigation.navigate('challenges')}>
-                    <Image source={require('../../assets/images/logos.png')}/>
+                    <Image source={require('../../assets/images/child.png')} style={{width:110, height:110}}/>
                 </TouchableWithoutFeedback>
-                <Text style={{fontSize:20, marginTop:30}}> Child / Adolescent</Text>
+                <Text style={{fontSize:20, marginTop:30,fontFamily:'JosefinSans_400Regular'}}> Child / Adolescent</Text>
             </View>
             <View style={{flexDirection:'row', margin:10}}>
                 <TouchableWithoutFeedback onPress={() => navigation.navigate('challenges')}>
-                    <Image source={require('../../assets/images/logos.png')}/>
+                    <Image source={require('../../assets/images/couple.png')} style={{width:110, height:110}}/>
                 </TouchableWithoutFeedback>
-                <Text style={{fontSize:20, marginTop:30}}> Couple / Family </Text>
+                <Text style={{fontSize:20, marginTop:30,fontFamily:'JosefinSans_400Regular'}}> Couple / Family </Text>
             </View>
             <View>
                 <TouchableOpacity onPress={() => navigation.navigate('Home')} style={styles.button}>
-                    <Text style={styles.buttonText}>Check our trivia games</Text>
+                    <Text style={styles.buttonText}>Identify Your Challenge</Text>
                 </TouchableOpacity>
             </View>
 
@@ -46,6 +85,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#E2F4FF',
+
 
 
     },
@@ -64,6 +104,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         textAlign:'center',
         fontSize:23
+
 
     },
 

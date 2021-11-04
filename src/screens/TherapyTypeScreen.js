@@ -14,7 +14,7 @@ function TherapyTypeScreen({navigation}) {
             <StatusBar style="auto"/>
             <TouchableWithoutFeedback onPress={() => navigation.navigate('Challenges')}>
             <View style={{paddingTop: 40}}>
-                <Image source={require('../../assets/images/logos.png')}/>
+                <Image source={require('../../assets/images/adult.png')}/>
             </View>
             </TouchableWithoutFeedback>
             <View>
@@ -22,7 +22,7 @@ function TherapyTypeScreen({navigation}) {
             </View>
             <TouchableWithoutFeedback onPress={() => navigation.navigate('Challenges')}>
                 <View style={{paddingTop: 40}}>
-                    <Image source={require('../../assets/images/logos.png')}/>
+                    <Image source={require('../../assets/images/child.png')}/>
                 </View>
             </TouchableWithoutFeedback>
             <View>
@@ -30,7 +30,7 @@ function TherapyTypeScreen({navigation}) {
             </View>
             <TouchableWithoutFeedback onPress={() => navigation.navigate('Challenges')}>
                 <View style={{paddingTop: 40}}>
-                    <Image source={require('../../assets/images/logos.png')}/>
+                    <Image source={require('../../assets/images/couple.png')}/>
                 </View>
             </TouchableWithoutFeedback>
             <View>

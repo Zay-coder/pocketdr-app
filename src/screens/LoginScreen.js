@@ -1,28 +1,51 @@
 import React, {useState} from 'react';
 import {StyleSheet, Text, View, Button, Image, TouchableOpacity, TextInput} from 'react-native';
 import axios from 'axios';
-
-
+import {AuthContext} from "../components/context";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 function LoginScreen({navigation}) {
-    const onPress = () => {};
+    const [email, setEmail] = useState(null);
+    const [password, setPassword] = useState(null);
+    const [badcredentials,setidBadCredentials] = useState(null);
+
+    const pressLogin = async () => {
+        try {
+            const res = await  axios.post('http://192.168.1.102:8000/api/login', {
+                "email" : email,
+                "password":password
+            });
+            await AsyncStorage.setItem('@storage_Key', res.data['token']);
+            console.log('navigation')
+            navigation.navigate('bottomtabs');
+            navigation.reset({
+                index: 0,
+                routes: [{ name: 'bottomtabs' }],
+            });
+        } catch(err) {
+            setidBadCredentials(1);
+            console.log(err);
+        }
+    };
+
+
     return (
         <View style={styles.container}>
             <View  style={{marginTop: 10, paddingTop: 30, textAlign:'left', paddingLeft:20}}>
                 <Text style={{ fontSize: 15, }}>
                     Email Address :
                 </Text>
-                <TextInput placeholder='E-mail' style={styles.textInput}/>
+                <TextInput placeholder='E-mail' style={styles.textInput} onChangeText={(email) => setEmail(email)}/>
             </View>
             <View  style={{paddingTop: 20, textAlign:'left', paddingLeft:20}}>
                 <Text style={{ fontSize: 15, }}>
                     Password :
                 </Text>
-                <TextInput placeholder='Password' style={styles.textInput} secureTextEntry={true}/>
+                <TextInput placeholder='Password' style={styles.textInput} secureTextEntry={true} onChangeText={(password) => setPassword(password)}/>
             </View>
             <View style={{marginTop: 20}}>
-                <TouchableOpacity onPress={() => navigation.navigate('Home')} style={styles.button}>
+                <TouchableOpacity onPress={pressLogin} style={styles.button}>
                     <Text style={styles.buttonText}>Login</Text>
                 </TouchableOpacity>
                 <Text style={{fontSize: 15, color:'#797979', textAlign: 'center',marginTop:5}}>

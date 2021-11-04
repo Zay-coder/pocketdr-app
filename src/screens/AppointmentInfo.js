@@ -10,7 +10,7 @@ function AppointmentInfoScreen({navigation}) {
     const onPress = () => {};
     return (
         <View style={styles.container}>
-            <Text style={{paddingTop: 40, fontSize: 30, fontWeight:'bold', paddingLeft:15}}>Appointment Info screen!</Text>
+            <Text style={{paddingTop: 40, fontSize: 30, fontWeight:'bold', paddingLeft:15,}}>Appointment Info screen!</Text>
             <StatusBar style="auto"/>
 
         </View>
