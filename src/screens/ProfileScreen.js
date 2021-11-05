@@ -2,10 +2,48 @@
 import React, {useState} from 'react';
 import {StyleSheet, Text, View, Button, Image, TouchableOpacity, TouchableWithoutFeedback} from 'react-native';
 import {Avatar, ListItem} from "react-native-elements";
+import {
+    JosefinSans_100Thin,
+    JosefinSans_200ExtraLight,
+    JosefinSans_300Light,
+    JosefinSans_400Regular,
+    JosefinSans_500Medium,
+    JosefinSans_600SemiBold,
+    JosefinSans_700Bold,
+    JosefinSans_100Thin_Italic,
+    JosefinSans_200ExtraLight_Italic,
+    JosefinSans_300Light_Italic,
+    JosefinSans_400Regular_Italic,
+    JosefinSans_500Medium_Italic,
+    JosefinSans_600SemiBold_Italic,
+    JosefinSans_700Bold_Italic
+} from '@expo-google-fonts/josefin-sans'
+import {useFonts} from 'expo-font';
+import AppLoading from "expo-app-loading";
 
 
 
 export function ProfileScreen({navigation}) {
+    let[fontsLoaded, error] = useFonts({
+        JosefinSans_100Thin,
+        JosefinSans_200ExtraLight,
+        JosefinSans_300Light,
+        JosefinSans_400Regular,
+        JosefinSans_500Medium,
+        JosefinSans_600SemiBold,
+        JosefinSans_700Bold,
+        JosefinSans_100Thin_Italic,
+        JosefinSans_200ExtraLight_Italic,
+        JosefinSans_300Light_Italic,
+        JosefinSans_400Regular_Italic,
+        JosefinSans_500Medium_Italic,
+        JosefinSans_600SemiBold_Italic,
+        JosefinSans_700Bold_Italic
+
+    })
+    if(!fontsLoaded) {
+        return <AppLoading/>
+    }
 
     const list = [
         {
@@ -23,10 +61,10 @@ export function ProfileScreen({navigation}) {
                             list.map((l, i) => (
                                 <ListItem key={i} bottomDivider>
                                     <ListItem.Content style={styles.listItem}>
-                                        <ListItem.Title style={{fontWeight: 'bold', fontSize:20}}>{l.name}</ListItem.Title>
-                                        <ListItem.Subtitle>{l.gender}</ListItem.Subtitle>
-                                        <ListItem.Subtitle>{l.dob}</ListItem.Subtitle>
-                                        <ListItem.Subtitle>{l.joined}</ListItem.Subtitle>
+                                        <ListItem.Title style={{fontFamily:'JosefinSans_700Bold', fontSize:20}}>{l.name}</ListItem.Title>
+                                        <ListItem.Subtitle style={{fontFamily:'JosefinSans_400Regular'}}>{l.gender}</ListItem.Subtitle>
+                                        <ListItem.Subtitle style={{fontFamily:'JosefinSans_400Regular'}}>{l.dob}</ListItem.Subtitle>
+                                        <ListItem.Subtitle style={{fontFamily:'JosefinSans_400Regular'}}>{l.joined}</ListItem.Subtitle>
                                     </ListItem.Content>
                                 </ListItem>
                             ))

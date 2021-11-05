@@ -17,7 +17,10 @@ function LoginScreen({navigation}) {
                 "password":password
             });
             await AsyncStorage.setItem('@storage_Key', res.data['token']);
-            console.log('navigation')
+            await AsyncStorage.setItem('@first_name', res.data.user['first_name']);
+            await AsyncStorage.setItem('@last_name', res.data.user['last_name']);
+            console.log(res.data.user['first_name'])
+            console.log(res.data.user['last_name'])
             navigation.navigate('bottomtabs');
             navigation.reset({
                 index: 0,

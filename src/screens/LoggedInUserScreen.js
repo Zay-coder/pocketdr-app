@@ -1,5 +1,5 @@
 import {StatusBar} from 'expo-status-bar';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, View, Button, Image, TouchableOpacity, TouchableWithoutFeedback} from 'react-native';
 import {
     JosefinSans_100Thin,
@@ -19,6 +19,9 @@ import {
 } from '@expo-google-fonts/josefin-sans'
 import {useFonts} from 'expo-font';
 import AppLoading from "expo-app-loading";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+
 
 
 
@@ -44,10 +47,19 @@ function LoggedInUserScreen({navigation}) {
     if(!fontsLoaded) {
         return <AppLoading/>
     }
-    const onPress = () => {};
+    // const [name, setName] = useState(null);
+    //
+    // const userName = async()=>{
+    //     await setName(AsyncStorage.getItem('@first_name'));
+    //
+    // }
+    // useEffect(()=>{
+    //     userName();
+    // },[])
+
     return (
         <View style={styles.container}>
-            <Text style={{paddingTop: 30, fontSize: 20, fontWeight:'bold', textAlign: 'center'}}>Hello User!</Text>
+            <Text style={{paddingTop: 40, fontSize: 20, fontFamily:'JosefinSans_700Bold', textAlign: 'center'}}>Welcome Patrick El Zaybak!</Text>
             <StatusBar style="auto"/>
             <Text style={{ fontSize: 20, marginTop:20, textAlign: 'center',fontFamily:'JosefinSans_400Regular'}}>Choose Therapy Type</Text>
             <View style={{flexDirection:'row', margin:10}}>

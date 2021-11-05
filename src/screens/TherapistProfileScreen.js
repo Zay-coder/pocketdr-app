@@ -1,84 +1,90 @@
 import {StatusBar} from 'expo-status-bar';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
+import {StyleSheet, Text, View, Button, Image, TouchableOpacity, TouchableWithoutFeedback, ScrollView} from 'react-native';
 import {
-    StyleSheet,
-    Text,
-    View,
-    Button,
-    Image,
-    TouchableOpacity,
-    TouchableWithoutFeedback,
-    TextInput, ScrollView
-} from 'react-native';
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
-import {createNativeStackNavigator} from "react-native-screens/native-stack";
-import {Avatar, Card, Icon, ListItem, Badge} from "react-native-elements";
+    JosefinSans_100Thin,
+    JosefinSans_200ExtraLight,
+    JosefinSans_300Light,
+    JosefinSans_400Regular,
+    JosefinSans_500Medium,
+    JosefinSans_600SemiBold,
+    JosefinSans_700Bold,
+    JosefinSans_100Thin_Italic,
+    JosefinSans_200ExtraLight_Italic,
+    JosefinSans_300Light_Italic,
+    JosefinSans_400Regular_Italic,
+    JosefinSans_500Medium_Italic,
+    JosefinSans_600SemiBold_Italic,
+    JosefinSans_700Bold_Italic
+} from '@expo-google-fonts/josefin-sans'
+import {useFonts} from 'expo-font';
+import AppLoading from "expo-app-loading";
+import axios from "axios";
+
+
+
+function TherapistProfileScreen({navigation, route}) {
+    const id = route.params.id;
+    const [therapists, setTherapists] = useState('test');
+
+
+    useEffect(()=>{
+        getTherapist();
+    },[])
+
+
+    const getTherapist = async ()=> {
+        const response = await axios.get('http://192.168.1.102:8000/api/get_chosen_therapist/'+id);
+        setTherapists(response.data)
+
+    }
 
 
 
 
+    let[fontsLoaded, error] = useFonts({
+        JosefinSans_100Thin,
+        JosefinSans_200ExtraLight,
+        JosefinSans_300Light,
+        JosefinSans_400Regular,
+        JosefinSans_500Medium,
+        JosefinSans_600SemiBold,
+        JosefinSans_700Bold,
+        JosefinSans_100Thin_Italic,
+        JosefinSans_200ExtraLight_Italic,
+        JosefinSans_300Light_Italic,
+        JosefinSans_400Regular_Italic,
+        JosefinSans_500Medium_Italic,
+        JosefinSans_600SemiBold_Italic,
+        JosefinSans_700Bold_Italic
 
-function TherapistsScreen({navigation}) {
-    const onPress = () => {};
-    const list = [
-        {
-            name: 'Amy Farha',
-            avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
-            subtitle: 'CBT Specialist',
-            yof:'7 years of experience'
-        },
+    })
+    if(!fontsLoaded) {
+        return <AppLoading/>
+    }
 
-    ]
-    return (
+    return therapists ? (
         <View style={styles.container}>
-            <View  style={{paddingTop:40, alignItems:'center', }}>
-                <Text style={{fontSize: 20}}>Therapist</Text>
-            </View>
-            <View>
+                    <View key={therapists.id}>
+                        <View style={{flexDirection: 'row', borderWidth: 1, borderColor: '#fff'}}>
+                            <Image style={{height: 128, width: 128, marginBottom: 10, marginTop: 10, marginLeft: 10}}
+                                   source={{uri: therapists.picture}}/>
+                            <View style={{marginBottom: 10, marginTop: 10, marginLeft: 10}}>
+                                <Text style={{fontFamily: 'JosefinSans_700Bold', fontSize: 20}}>{therapists.first_name} {therapists.last_name}</Text>
+                                <Text style={{fontFamily: 'JosefinSans_400Regular', fontSize: 15}}>{therapists.speciality} </Text>
+                                <Text style={{fontFamily: 'JosefinSans_400Regular', fontSize: 15}}>Years of Experience : {therapists.yof} </Text>
+                                <Text style={{fontFamily: 'JosefinSans_400Regular', fontSize: 15}}>Price : {therapists.price}$ / Session </Text>
 
-                <View style={{paddingTop: 30}}>
-                    {
-                        list.map((l, i) => (
-                            <ListItem key={i} bottomDivider>
-                                <Avatar source={{uri: l.avatar_url}} style={styles.avatar} />
-                                <ListItem.Content style={styles.listItem}>
-                                        <ListItem.Title style={{fontWeight: 'bold', fontSize:25}}>{l.name}</ListItem.Title>
-                                        <ListItem.Subtitle>{l.subtitle}</ListItem.Subtitle>
-                                        <ListItem.Subtitle>{l.yof}</ListItem.Subtitle>
-                                </ListItem.Content>
-                            </ListItem>
-                        ))
-                    }
-                </View>
-                <View>
-                    <Text style={{fontSize:25 ,backgroundColor:'#D3D3D3', margin:5, padding: 3}}> Price:                         100$/hour </Text>
-                </View>
-                <View>
-                    <Text style={{fontSize:25, padding: 3, fontWeight: 'bold'}}>
-                        Bio
-                    </Text>
-                </View>
-                <View>
-                    <Text style={{fontSize:20 , margin:5, padding: 3}}>
-                        Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum
+                            </View>
+                        </View>
+                    </View>
+        </View>
 
-                    </Text>
-                </View>
-                <View>
-                    <TouchableOpacity onPress={() => navigation.navigate('therapistprofile')} style={styles.button}>
-                        <Text style={styles.buttonText}>Book Appointment</Text>
-                    </TouchableOpacity>
-                </View>
-
-
-
-            </View>
-
-
-
+    ): ( <View>
+            <Text>Loading</Text>
         </View>
     )
+
 }
 
 const styles = StyleSheet.create({
@@ -88,51 +94,21 @@ const styles = StyleSheet.create({
 
 
 
-
     },
     button: {
         backgroundColor: '#ADE0FF',
-        borderRadius: 10,
+        borderRadius: 20,
         padding: 10,
         borderColor:'#000000',
         borderWidth: 1,
-        width: 320,
-        marginLeft: 20,
-        marginTop: 15
-
+        width: 200,
     },
     buttonText: {
         color: '#000000',
         fontWeight: 'bold',
         textAlign:'center',
-        fontSize:25
-
-    },
-    search: {
-
-        borderWidth: 1,
-        borderColor:'#000000',
-        borderRadius: 20,
-        textAlign: 'center',
-        padding: 5,
-        width: 260,
-        marginLeft: 50
-
-    },
-    avatar: {
-        width: 100,
-        height: 100,
-        borderRadius: 45,
-        overflow:'hidden'
-    },
-
-    listItem: {
-        padding:20,
-        borderWidth:1,
-        borderRadius:10,
-
 
     }
 });
 
-export default  TherapistsScreen;
+export default  TherapistProfileScreen;

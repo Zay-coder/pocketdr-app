@@ -29,6 +29,7 @@ const ProfileStack = createStackNavigator();
 const AppointmentsStack = createStackNavigator();
 const HomeStack = createStackNavigator();
 
+
 // Browse nav and every navigation related to it
 const ProfileStackScreen = () => (
     <ProfileStack.Navigator>
@@ -118,6 +119,7 @@ const HomeStackScreen = () => (
                 },
             }}
         />
+
         <HomeStack.Screen
             name="therapists"
             component={TherapistsScreen}
@@ -155,7 +157,9 @@ const HomeStackScreen = () => (
             }}
         />
 
+
     </HomeStack.Navigator>
+
 );
 
 const BottomTabScreen = () => (
@@ -273,18 +277,7 @@ export default function App() {
                             name="bottomtabs"
                             component={BottomTabScreen}
                             options={{
-                                title: 'Welcome',
-                                headerTitleAlign: 'center',
-                                headerStyle: {
-                                    backgroundColor: '#ffffff',
-
-
-                                },
-                                headerTintColor: '#000000',
-                                headerTitleStyle: {
-                                    fontWeight: 'bold',
-
-                                },
+                                headerShown: false
                             }}
                             />
 
