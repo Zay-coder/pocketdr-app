@@ -17,6 +17,10 @@ import axios from 'axios';
 function TherapistsScreen({navigation}) {
 
 
+
+
+
+
     const [therapists, setTherapists] = useState(null);
     const getTherapist = async ()=> {
         const response = await axios.get('http://192.168.1.102:8000/api/all_therapists');

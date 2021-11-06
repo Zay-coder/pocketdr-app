@@ -50,7 +50,7 @@ function LoggedInUserScreen({navigation}) {
     // const [name, setName] = useState(null);
     //
     // const userName = async()=>{
-    //     await setName(AsyncStorage.getItem('@first_name'));
+    //     setName(await  AsyncStorage.getItem('@first_name'));
     //
     // }
     // useEffect(()=>{

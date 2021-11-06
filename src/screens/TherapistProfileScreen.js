@@ -113,7 +113,7 @@ function TherapistProfileScreen({navigation, route}) {
 
                     </View>
             <View style={{alignItems:'center'}}>
-                <TouchableOpacity onPress={() => navigation.navigate('availabledates')} style={styles.button}>
+                <TouchableOpacity onPress={() => navigation.navigate('availabledates',{id:therapists.id})} style={styles.button}>
                     <Text style={styles.buttonText}>Book Appointment</Text>
                 </TouchableOpacity>
             </View>
