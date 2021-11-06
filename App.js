@@ -10,6 +10,8 @@ import SignUpScreen from "./src/screens/SignUpScreen";
 import LoggedInUserScreen from "./src/screens/LoggedInUserScreen";
 import AppointmentsScreen from "./src/screens/AppointmentsScreen";
 import ProfileScreen from "./src/screens/ProfileScreen";
+import AvailableDatesScreen from "./src/screens/AvailableDatesScreen";
+import QuoteScreen from "./src/screens/QuoteScreen";
 import { LogBox } from 'react-native';
 LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
 LogBox.ignoreAllLogs();//Ignore all log notifications
@@ -28,9 +30,33 @@ const Tab = createMaterialBottomTabNavigator();
 const ProfileStack = createStackNavigator();
 const AppointmentsStack = createStackNavigator();
 const HomeStack = createStackNavigator();
+const QuoteStack= createStackNavigator();
 
 
 // Browse nav and every navigation related to it
+const QuoteStackScreen = () => (
+    <QuoteStack.Navigator>
+        <QuoteStack.Screen
+            name="fun"
+            component={QuoteScreen}
+            options={{
+                title: 'Fun',
+                headerTitleAlign: 'center',
+                headerStyle: {
+                    backgroundColor: '#ffffff',
+
+
+                },
+                headerTintColor: '#000000',
+                headerTitleStyle: {
+                    fontWeight: 'bold',
+
+                },
+            }}
+        />
+    </QuoteStack.Navigator>
+);
+
 const ProfileStackScreen = () => (
     <ProfileStack.Navigator>
         <ProfileStack.Screen
@@ -74,10 +100,10 @@ const AppointmentsStackScreen = () => (
             }}
         />
         <AppointmentsStack.Screen
-            name="appointmentInfo"
+            name="appointmentinfo"
             component={AppointmentInfoScreen}
             options={{
-                title: 'Appointment',
+                title: 'Appointment Info',
                 headerTitleAlign: 'center',
                 headerStyle: {
                     backgroundColor: '#ffffff',
@@ -156,6 +182,24 @@ const HomeStackScreen = () => (
                 },
             }}
         />
+        <HomeStack.Screen
+            name="availabledates"
+            component={AvailableDatesScreen}
+            options={{
+                title: 'Available Dates',
+                headerTitleAlign: 'center',
+                headerStyle: {
+                    backgroundColor: '#ffffff',
+
+
+                },
+                headerTintColor: '#000000',
+                headerTitleStyle: {
+                    fontWeight: 'bold',
+
+                },
+            }}
+        />
 
 
     </HomeStack.Navigator>
@@ -216,6 +260,20 @@ const BottomTabScreen = () => (
                 tabBarIcon: ({focused, color, size}) => (
                     <MaterialCommunityIcons
                         name={"account"}
+                        size={25}
+                        color={color}
+                    />
+                ),
+            }}
+        />
+        <Tab.Screen
+            name="Fun"
+            component={QuoteStackScreen}
+            options={{
+                headerShown: false,
+                tabBarIcon: ({focused, color, size}) => (
+                    <MaterialCommunityIcons
+                        name={"emoticon-happy"}
                         size={25}
                         color={color}
                     />

@@ -7,7 +7,6 @@ import axios from 'axios';
 
 
 function SignUpScreen({navigation}) {
-    const onPress = () => {};
     const [selectedValue, setSelectedValue] = useState("Gender");
     return (
         <View style={styles.container}>

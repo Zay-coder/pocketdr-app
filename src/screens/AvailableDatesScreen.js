@@ -6,10 +6,10 @@ import {StyleSheet, Text, View, Button, Image, TouchableOpacity, TouchableWithou
 
 
 
-function AppointmentInfoScreen({navigation}) {
+function AvailableDatesScreen({navigation}) {
     return (
         <View style={styles.container}>
-            <Text style={{paddingTop: 40, fontSize: 30, fontWeight:'bold', paddingLeft:15,}}>Appointment Info screen!</Text>
+            <Text style={{paddingTop: 30, fontSize: 20, fontFamily:'JosefinSans_700Bold', textAlign: 'center'}}>Available Dates</Text>
             <StatusBar style="auto"/>
 
         </View>
@@ -41,4 +41,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default  AppointmentInfoScreen;
+export default  AvailableDatesScreen;

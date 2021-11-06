@@ -80,11 +80,7 @@ function LoggedInUserScreen({navigation}) {
                 </TouchableWithoutFeedback>
                 <Text style={{fontSize:20, marginTop:30,fontFamily:'JosefinSans_400Regular'}}> Couple / Family </Text>
             </View>
-            <View>
-                <TouchableOpacity onPress={() => navigation.navigate('Home')} style={styles.button}>
-                    <Text style={styles.buttonText}>Identify Your Challenge</Text>
-                </TouchableOpacity>
-            </View>
+
 
 
 
@@ -115,7 +111,7 @@ const styles = StyleSheet.create({
         color: '#000000',
         fontWeight: 'bold',
         textAlign:'center',
-        fontSize:23
+        fontSize:20
 
 
     },

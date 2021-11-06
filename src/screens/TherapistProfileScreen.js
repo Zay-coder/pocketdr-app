@@ -20,22 +20,41 @@ import {
 import {useFonts} from 'expo-font';
 import AppLoading from "expo-app-loading";
 import axios from "axios";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
 
 
 function TherapistProfileScreen({navigation, route}) {
     const id = route.params.id;
-    const [therapists, setTherapists] = useState('test');
+    const [therapists, setTherapists] = useState();
+    const [upvote, setUpvote] = useState();
+    const [downvote, setDownvote] = useState();
 
 
     useEffect(()=>{
         getTherapist();
+    },[])
+    useEffect(()=>{
+        getUpvote();
+    },[])
+    useEffect(()=>{
+        getDownvote();
     },[])
 
 
     const getTherapist = async ()=> {
         const response = await axios.get('http://192.168.1.102:8000/api/get_chosen_therapist/'+id);
         setTherapists(response.data)
+
+    }
+    const getUpvote = async ()=> {
+        const response = await axios.get('http://192.168.1.10:8000/api/upvote/'+id);
+        setUpvote(response.data)
+
+    }
+    const getDownvote = async ()=> {
+        const response = await axios.get('http://192.168.1.10:8000/api/downvote/'+id);
+        setDownvote(response.data)
 
     }
 
@@ -63,6 +82,7 @@ function TherapistProfileScreen({navigation, route}) {
         return <AppLoading/>
     }
 
+
     return therapists ? (
         <View style={styles.container}>
                     <View key={therapists.id}>
@@ -74,10 +94,30 @@ function TherapistProfileScreen({navigation, route}) {
                                 <Text style={{fontFamily: 'JosefinSans_400Regular', fontSize: 15}}>{therapists.speciality} </Text>
                                 <Text style={{fontFamily: 'JosefinSans_400Regular', fontSize: 15}}>Years of Experience : {therapists.yof} </Text>
                                 <Text style={{fontFamily: 'JosefinSans_400Regular', fontSize: 15}}>Price : {therapists.price}$ / Session </Text>
+                                <Text style={{fontFamily: 'JosefinSans_400Regular', fontSize: 15}}> {therapists.upvotes}   <MaterialCommunityIcons
+                                    name={"thumb-up"}
+                                    size={25}
+                                    onPress={() => {getUpvote} }/></Text>
+
+                                <Text style={{fontFamily: 'JosefinSans_400Regular', fontSize: 15}}> {therapists.downvotes}   <MaterialCommunityIcons
+                                    name={"thumb-down"}
+                                    size={25}
+                                    onPress={() => {getDownvote} }/></Text>
 
                             </View>
                         </View>
+                        <View>
+                            <Text style={{fontFamily: 'JosefinSans_700Bold', fontSize: 20, textDecorationLine: 'underline',margin:5}}>Bio:</Text>
+                            <Text style={{fontFamily: 'JosefinSans_400Regular', fontSize: 20, textAlign: 'justify',margin:5}}>{therapists.bio}</Text>
+                        </View>
+
                     </View>
+            <View style={{alignItems:'center'}}>
+                <TouchableOpacity onPress={() => navigation.navigate('availabledates')} style={styles.button}>
+                    <Text style={styles.buttonText}>Book Appointment</Text>
+                </TouchableOpacity>
+            </View>
+
         </View>
 
     ): ( <View>
@@ -94,6 +134,7 @@ const styles = StyleSheet.create({
 
 
 
+
     },
     button: {
         backgroundColor: '#ADE0FF',
@@ -101,12 +142,14 @@ const styles = StyleSheet.create({
         padding: 10,
         borderColor:'#000000',
         borderWidth: 1,
-        width: 200,
+        width: 320,
+        marginTop:40
     },
     buttonText: {
         color: '#000000',
         fontWeight: 'bold',
         textAlign:'center',
+        fontSize:20
 
     }
 });
