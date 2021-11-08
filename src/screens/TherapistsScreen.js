@@ -1,27 +1,22 @@
 
-import {StatusBar} from 'expo-status-bar';
 import React, {useState, useEffect} from 'react';
 import {
     StyleSheet,
     Text,
     View,
-    Button,
     Image,
     TouchableOpacity,
-    TouchableWithoutFeedback,
-    ScrollView
+    ScrollView, TextInput
 } from 'react-native';
 import axios from 'axios';
 
 
 function TherapistsScreen({navigation}) {
-
-
-
-
-
-
     const [therapists, setTherapists] = useState(null);
+
+
+
+
     const getTherapist = async ()=> {
         const response = await axios.get('http://192.168.1.102:8000/api/all_therapists');
         setTherapists(response.data)
@@ -31,9 +26,27 @@ function TherapistsScreen({navigation}) {
     useEffect(()=>{
         getTherapist();
     },[])
+
+
+    // this.searchTherapists = function (value) {
+    //     const filteredTherapists = therapists.filter(
+    //         therapists => {
+    //             let therapistLowercase = (therapist.first_name+''+therapist.last_name).toLowerCase()
+    //             let searchTermLowerase = value.toLowerCase()
+    //             return therapistLowercase.indexOf(searchTermLowerase)>-1
+    //         }
+    //     )
+    //     setTherapists({therapists:filteredTherapists});
+    // }
     return(
 
     <View style={styles.container}>
+        <TextInput
+            style={styles.searchInput}
+            placeholder='search therapists'
+            underlineColorAndroid='transparent'
+            // onChangeText={(value)=>this.searchTherapists(value)}
+            />
         <ScrollView>
         {therapists &&
 
@@ -82,6 +95,14 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         textAlign:'center',
 
+    },
+    searchInput: {
+        height: 40,
+        borderWidth: 1,
+        paddingLeft: 20,
+        margin: 5,
+        borderColor: '#009688',
+        backgroundColor:'#fff'
     }
 
 });

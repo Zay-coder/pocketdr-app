@@ -17,10 +17,19 @@ function LoginScreen({navigation}) {
                 "password":password
             });
             await AsyncStorage.setItem('@storage_Key', res.data['token']);
+            await AsyncStorage.setItem('@user_id', res.data.user['id']);
             await AsyncStorage.setItem('@first_name', res.data.user['first_name']);
             await AsyncStorage.setItem('@last_name', res.data.user['last_name']);
+            await AsyncStorage.setItem('@email', res.data.user['email']);
+            await AsyncStorage.setItem('@dob', res.data.user['dob']);
+            await AsyncStorage.setItem('@gender', res.data.user['gender']);
+
+            console.log(res.data.user['id'])
             console.log(res.data.user['first_name'])
             console.log(res.data.user['last_name'])
+            console.log(res.data.user['email'])
+            console.log(res.data.user['dob'])
+            console.log(res.data.user['gender'])
             navigation.navigate('bottomtabs');
             navigation.reset({
                 index: 0,

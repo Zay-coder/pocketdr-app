@@ -27,39 +27,18 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 function LoggedInUserScreen({navigation}) {
-    let[fontsLoaded, error] = useFonts({
-        JosefinSans_100Thin,
-        JosefinSans_200ExtraLight,
-        JosefinSans_300Light,
-        JosefinSans_400Regular,
-        JosefinSans_500Medium,
-        JosefinSans_600SemiBold,
-        JosefinSans_700Bold,
-        JosefinSans_100Thin_Italic,
-        JosefinSans_200ExtraLight_Italic,
-        JosefinSans_300Light_Italic,
-        JosefinSans_400Regular_Italic,
-        JosefinSans_500Medium_Italic,
-        JosefinSans_600SemiBold_Italic,
-        JosefinSans_700Bold_Italic
+    const [firstname, setFirstName] = useState('');
+    const [lastname, setLastName] = useState('');
 
-    })
-    if(!fontsLoaded) {
-        return <AppLoading/>
-    }
-    // const [name, setName] = useState(null);
-    //
-    // const userName = async()=>{
-    //     setName(await  AsyncStorage.getItem('@first_name'));
-    //
-    // }
-    // useEffect(()=>{
-    //     userName();
-    // },[])
+    useEffect(async ()=>{
+        setFirstName(await  AsyncStorage.getItem('@first_name'));
+        setLastName(await  AsyncStorage.getItem('@last_name'));
+    },[])
+
 
     return (
         <View style={styles.container}>
-            <Text style={{paddingTop: 40, fontSize: 20, fontFamily:'JosefinSans_700Bold', textAlign: 'center'}}>Welcome Patrick El Zaybak!</Text>
+            <Text style={{paddingTop: 40, fontSize: 20, fontFamily:'JosefinSans_700Bold', textAlign: 'center'}}>Welcome {firstname} {lastname}</Text>
             <StatusBar style="auto"/>
             <Text style={{ fontSize: 20, marginTop:20, textAlign: 'center',fontFamily:'JosefinSans_400Regular'}}>Choose Therapy Type</Text>
             <View style={{flexDirection:'row', margin:10}}>

@@ -1,74 +1,44 @@
 
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, View, Button, Image, TouchableOpacity, TouchableWithoutFeedback} from 'react-native';
-import {Avatar, ListItem} from "react-native-elements";
-import {
-    JosefinSans_100Thin,
-    JosefinSans_200ExtraLight,
-    JosefinSans_300Light,
-    JosefinSans_400Regular,
-    JosefinSans_500Medium,
-    JosefinSans_600SemiBold,
-    JosefinSans_700Bold,
-    JosefinSans_100Thin_Italic,
-    JosefinSans_200ExtraLight_Italic,
-    JosefinSans_300Light_Italic,
-    JosefinSans_400Regular_Italic,
-    JosefinSans_500Medium_Italic,
-    JosefinSans_600SemiBold_Italic,
-    JosefinSans_700Bold_Italic
-} from '@expo-google-fonts/josefin-sans'
-import {useFonts} from 'expo-font';
-import AppLoading from "expo-app-loading";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 
 export function ProfileScreen({navigation}) {
-    let[fontsLoaded, error] = useFonts({
-        JosefinSans_100Thin,
-        JosefinSans_200ExtraLight,
-        JosefinSans_300Light,
-        JosefinSans_400Regular,
-        JosefinSans_500Medium,
-        JosefinSans_600SemiBold,
-        JosefinSans_700Bold,
-        JosefinSans_100Thin_Italic,
-        JosefinSans_200ExtraLight_Italic,
-        JosefinSans_300Light_Italic,
-        JosefinSans_400Regular_Italic,
-        JosefinSans_500Medium_Italic,
-        JosefinSans_600SemiBold_Italic,
-        JosefinSans_700Bold_Italic
+    const [firstname, setFirstName] = useState('');
+    const [lastname, setLastName] = useState('');
+    const [email, setEmail] = useState('');
+    const [dob, setDob] = useState('');
+    const [gender, setGender] = useState('');
 
-    })
-    if(!fontsLoaded) {
-        return <AppLoading/>
-    }
+    useEffect(async ()=>{
+        setFirstName(await  AsyncStorage.getItem('@first_name'));
+        setLastName(await  AsyncStorage.getItem('@last_name'));
+        setEmail(await  AsyncStorage.getItem('@email'));
+        setDob(await  AsyncStorage.getItem('@dob'));
+        setGender(await  AsyncStorage.getItem('@gender'));
+        console.log(await  AsyncStorage.getItem('@dob'))
+        console.log(await  AsyncStorage.getItem('@gender'))
+    },[])
 
-    const list = [
-        {
-            name: 'Patrick El Zaybak',
-            gender: 'Male',
-            dob:'1996-11-03',
-            joined:'joined in 2017-05-11'
-        },
 
-    ]
+
     return (
         <View style={styles.container}>
-            <View style={{marginTop:30}}>
-                        {
-                            list.map((l, i) => (
-                                <ListItem key={i} bottomDivider>
-                                    <ListItem.Content style={styles.listItem}>
-                                        <ListItem.Title style={{fontFamily:'JosefinSans_700Bold', fontSize:20}}>{l.name}</ListItem.Title>
-                                        <ListItem.Subtitle style={{fontFamily:'JosefinSans_400Regular'}}>{l.gender}</ListItem.Subtitle>
-                                        <ListItem.Subtitle style={{fontFamily:'JosefinSans_400Regular'}}>{l.dob}</ListItem.Subtitle>
-                                        <ListItem.Subtitle style={{fontFamily:'JosefinSans_400Regular'}}>{l.joined}</ListItem.Subtitle>
-                                    </ListItem.Content>
-                                </ListItem>
-                            ))
+            <View>
+                <View style={{flexDirection: 'row', borderWidth: 1, borderColor: '#fff'}}>
+                    <View style={{marginBottom: 10, marginTop: 10, marginLeft: 10}}>
+                        <Text style={{fontFamily: 'JosefinSans_700Bold', fontSize: 20}}>{firstname} {lastname}</Text>
+                        <Text style={{fontFamily: 'JosefinSans_400Regular', fontSize: 15}}>{email} </Text>
+                        <Text style={{fontFamily: 'JosefinSans_400Regular', fontSize: 15}}>{dob}</Text>
+                        {gender == 0 ? <Text style={{fontFamily: 'JosefinSans_400Regular', fontSize: 15}}>male</Text>
+                            :
+                            <Text style={{fontFamily: 'JosefinSans_400Regular', fontSize: 15}}>female</Text>
                         }
+
+                    </View>
+                </View>
 
             </View>
             <View style={{alignItems:'center'}}>

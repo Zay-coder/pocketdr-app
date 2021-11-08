@@ -37,10 +37,10 @@ const QuoteStack= createStackNavigator();
 const QuoteStackScreen = () => (
     <QuoteStack.Navigator>
         <QuoteStack.Screen
-            name="fun"
+            name="quote"
             component={QuoteScreen}
             options={{
-                title: 'Fun',
+                title: 'Motivation',
                 headerTitleAlign: 'center',
                 headerStyle: {
                     backgroundColor: '#ffffff',
@@ -267,7 +267,7 @@ const BottomTabScreen = () => (
             }}
         />
         <Tab.Screen
-            name="Fun"
+            name="quote"
             component={QuoteStackScreen}
             options={{
                 headerShown: false,
