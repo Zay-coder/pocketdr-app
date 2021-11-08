@@ -16,13 +16,13 @@ function LoginScreen({navigation}) {
                 "email" : email,
                 "password":password
             });
-            await AsyncStorage.setItem('@storage_Key', res.data['token']);
-            await AsyncStorage.setItem('@user_id', res.data.user['id']);
-            await AsyncStorage.setItem('@first_name', res.data.user['first_name']);
-            await AsyncStorage.setItem('@last_name', res.data.user['last_name']);
-            await AsyncStorage.setItem('@email', res.data.user['email']);
-            await AsyncStorage.setItem('@dob', res.data.user['dob']);
-            await AsyncStorage.setItem('@gender', res.data.user['gender']);
+            await AsyncStorage.setItem('@storage_Key',res.data['token'].toString());
+            await AsyncStorage.setItem('@user_id', res.data.user['id'].toString());
+            await AsyncStorage.setItem('@first_name', res.data.user['first_name'].toString());
+            await AsyncStorage.setItem('@last_name', res.data.user['last_name'].toString());
+            await AsyncStorage.setItem('@email', res.data.user['email'].toString());
+            await AsyncStorage.setItem('@dob', res.data.user['dob'].toString());
+            await AsyncStorage.setItem('@gender', res.data.user['gender'].toString());
 
             console.log(res.data.user['id'])
             console.log(res.data.user['first_name'])
